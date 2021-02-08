@@ -1,0 +1,31 @@
+<mat-toolbar *ngIf="successMsg" color="accent">{{ successMsg }}</mat-toolbar>
+<mat-toolbar *ngIf="errorMsg" color="warn">{{ errorMsg }}</mat-toolbar>
+<div class="form-container">
+
+  <form (submit)="createAppointment()">
+    <mat-form-field>
+      <input [(ngModel)]="appointmentFromDate" name="appointmentFromDate" matInput [matDatepicker]="picker" placeholder="From">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input [(ngModel)]="appointmentToDate" name="appointmentToDate" matInput [matDatepicker]="picker1" placeholder="To">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input [(ngModel)]="name" name="name" matInput placeholder="Name">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Select Room</mat-label>
+      <mat-select [(ngModel)]="selectedRoom" name="selectedRoom">
+        <mat-option *ngFor="let room of roomList" [value]="room.room">
+          {{ room.room }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+      
+   
+    <button mat-raised-button color="primary">Book</button>
+  </form>
+</div>

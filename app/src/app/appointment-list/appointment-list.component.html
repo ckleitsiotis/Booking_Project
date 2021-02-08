@@ -1,0 +1,35 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+<mat-toolbar  *ngIf="successMsg" color="accent"> {{ successMsg }} </mat-toolbar>
+<mat-toolbar  *ngIf="errorMsg" color="warn"> {{ errorMsg }} </mat-toolbar>
+
+<div *ngIf="!loading && !errorMsg">
+
+    <table mat-table [dataSource]="appointments" class="mat-elevation-z8">
+            <ng-container matColumnDef="appointmentFromDate">
+                <th mat-header-cell *matHeaderCellDef>From</th>
+                <td mat-cell *matCellDef="let appointment"> {{ appointment.appointmentFromDate | date:'dd/MM/yyyy' }}</td>
+            </ng-container>
+            <ng-container matColumnDef="appointmentToDate">
+                <th mat-header-cell *matHeaderCellDef>To</th>
+                <td mat-cell *matCellDef="let appointment"> {{ appointment.appointmentToDate | date:'dd/MM/yyyy' }}</td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let appointment"> {{ appointment.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="room">
+                <th mat-header-cell *matHeaderCellDef>Room</th>
+                <td mat-cell *matCellDef="let appointment"> {{ appointment.room }}</td>
+            </ng-container>
+            <ng-container matColumnDef="cancel">
+                <th mat-header-cell *matHeaderCellDef>Cancel</th>
+                <td mat-cell *matCellDef="let appointment"><button (click)="cancelAppointment(appointment._id)" mat-raised-button color="warn">Cancel</button></td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let appointments; columns: columns"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+              </tr>
+    </table>
+</div>

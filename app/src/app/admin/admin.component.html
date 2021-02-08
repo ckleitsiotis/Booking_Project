@@ -1,0 +1,10 @@
+<mat-toolbar *ngIf="successMsg" color="accent">{{ successMsg }}</mat-toolbar>
+<mat-toolbar *ngIf="errorMsg" color="warn">{{ errorMsg }}</mat-toolbar>
+<div class="form-container">
+    <form (submit)="createRoom()">
+        <mat-form-field>
+          <input [(ngModel)]="room" name="room" matInput placeholder="Room" type="room">
+        </mat-form-field>
+        <button mat-raised-button color="primary">Add Room</button>
+    </form>
+</div>
